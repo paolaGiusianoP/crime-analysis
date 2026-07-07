@@ -26,8 +26,8 @@ st.markdown(f"""
 load_css()
 
 with st.sidebar:
-    st.markdown("""
-    <div style="text-align: center; padding: 1rem 0;">
+    st.markdown(f"""
+    <div style="text-align: center; padding: 1rem 0; color: #0F172A;">
         <div style="font-size: 3rem;">⚖️</div>
         <div style="font-weight: 700; font-size: 1.2rem; color: #0F172A;">FBI Hate Crime</div>
         <div style="font-size: 0.8rem; color: #64748B;">Statistics 2020</div>
@@ -35,12 +35,12 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("---")
+    st.divider()
     
     st.markdown("""
-    <div style="background: #F8FAFC; border-radius: 0.75rem; padding: 1rem;">
-        <div style="font-weight: 600; margin-bottom: 0.75rem;">📊 Dataset Overview</div>
-        <div style="font-size: 0.85rem; line-height: 1.6;">
+    <div style="background: #F8FAFC; border-radius: 0.75rem; padding: 1rem; color: #0F172A;">
+        <div style="font-weight: 600; margin-bottom: 0.75rem; color: #0F172A;">📊 Dataset Overview</div>
+        <div style="font-size: 0.85rem; line-height: 1.6; color: #334155;">
             • 8,263 Incidents<br>
             • 11,129 Offenses<br>
             • 11,472 Victims<br>
@@ -49,23 +49,24 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("---")
+    st.divider()
     
     if st.button("🔄 Forzar Recarga", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
     
-    st.markdown("---")
+    st.divider()
+    
     st.markdown("""
     <div style="font-size: 0.7rem; color: #94A3B8; text-align: center;">
         📅 FBI UCR Program • Hate Crime Statistics 2020
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="hero-card">
-    <h1>⚖️ FBI Hate Crime Statistics 2020</h1>
-    <p>
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border-radius: 1.5rem; padding: 2.5rem; margin-bottom: 2rem; border: none;">
+    <h1 style="color: white; font-size: 2.2rem; margin-bottom: 1rem; font-weight: 700;">⚖️ FBI Hate Crime Statistics 2020</h1>
+    <p style="color: #CBD5E1; font-size: 1rem; max-width: 80%;">
         Interactive dashboard to explore, visualize, and analyze hate crime incidents 
         reported by the FBI. Includes exploratory analysis, geographic visualization,
         risk classification, and actionable insights.
@@ -99,9 +100,9 @@ sections = [
 for col, section in zip([col1, col2, col3, col4], sections):
     with col:
         st.markdown(f"""
-        <div class="card" style="text-align: center;">
+        <div style="background: #FFFFFF; border-radius: 1rem; border: 1px solid #E2E8F0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); padding: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
             <div style="font-size: 2.5rem;">{section['icon']}</div>
-            <h4 style="color: #0EA5E9; margin-bottom: 0.5rem;">{section['title']}</h4>
+            <h4 style="color: #0EA5E9; margin-bottom: 0.5rem; font-weight: 600;">{section['title']}</h4>
             <p style="font-size: 0.85rem; color: #64748B;">{section['desc']}</p>
         </div>
         """, unsafe_allow_html=True)
@@ -114,22 +115,22 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown("""
-    <div class="insight-card">
-        <h4>🏷️ Predominant Bias</h4>
-        <p>Race and ethnicity motivated incidents represent the most frequent category (63.3% of total).</p>
+    <div style="background: #F0F9FF; border-left: 4px solid #0EA5E9; border-radius: 0.75rem; padding: 1.25rem; margin: 1rem 0;">
+        <h4 style="color: #0369A1; margin-bottom: 0.5rem; font-weight: 600;">🏷️ Predominant Bias</h4>
+        <p style="color: #0F172A;">Race and ethnicity motivated incidents represent the most frequent category (63.3% of total).</p>
         <div style="background: #E0F2FE; border-radius: 0.75rem; padding: 0.75rem; margin-top: 1rem;">
-            <strong>5,227 incidents</strong> <span style="color: #64748B;">(63.3% of total)</span>
+            <strong style="color: #0F172A;">5,227 incidents</strong> <span style="color: #64748B;">(63.3% of total)</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
-    <div class="insight-card">
-        <h4>📍 Geographic Concentration</h4>
-        <p>Hate crimes are concentrated in California, Texas, and New York.</p>
+    <div style="background: #F0F9FF; border-left: 4px solid #0EA5E9; border-radius: 0.75rem; padding: 1.25rem; margin: 1rem 0;">
+        <h4 style="color: #0369A1; margin-bottom: 0.5rem; font-weight: 600;">📍 Geographic Concentration</h4>
+        <p style="color: #0F172A;">Hate crimes are concentrated in California, Texas, and New York.</p>
         <div style="background: #FEF3C7; border-radius: 0.75rem; padding: 0.75rem; margin-top: 1rem;">
-            <strong>Top 3 states</strong> <span style="color: #64748B;">represent 28% of all offenses</span>
+            <strong style="color: #0F172A;">Top 3 states</strong> <span style="color: #64748B;">represent 28% of all offenses</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -149,7 +150,7 @@ quick_stats = [
 for col, stat in zip([col1, col2, col3], quick_stats):
     with col:
         st.markdown(f"""
-        <div class="card" style="text-align: center;">
+        <div style="background: #FFFFFF; border-radius: 1rem; border: 1px solid #E2E8F0; padding: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
             <div style="font-size: 2rem;">{stat['icon']}</div>
             <div style="font-size: 2rem; font-weight: 700; color: #0EA5E9;">{stat['value']}</div>
             <div style="color: #64748B;">{stat['label']}</div>
