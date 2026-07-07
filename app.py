@@ -1,9 +1,12 @@
 import streamlit as st
+import datetime
 from src.styles import load_css
 from src.components import (
     render_page_header, render_section_title, render_kpi_grid,
     render_insight_card, render_footer
 )
+
+VERSION = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
 st.set_page_config(
     page_title="FBI Hate Crime Analysis",
@@ -12,11 +15,15 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-load_css()
+st.markdown(f"""
+<!-- Version: {VERSION} -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, private">
+""", unsafe_allow_html=True)
 
-# ======================================================
-# SIDEBAR
-# ======================================================
+load_css()
 
 with st.sidebar:
     st.markdown("""
@@ -24,6 +31,7 @@ with st.sidebar:
         <div style="font-size: 3rem;">⚖️</div>
         <div style="font-weight: 700; font-size: 1.2rem; color: #0F172A;">FBI Hate Crime</div>
         <div style="font-size: 0.8rem; color: #64748B;">Statistics 2020</div>
+        <div style="font-size: 0.6rem; color: #94A3B8; margin-top: 0.25rem;">v{VERSION}</div>
     </div>
     """, unsafe_allow_html=True)
     
@@ -42,17 +50,18 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
+    
+    if st.button("🔄 Forzar Recarga", use_container_width=True):
+        st.cache_data.clear()
+        st.rerun()
+    
+    st.markdown("---")
     st.markdown("""
     <div style="font-size: 0.7rem; color: #94A3B8; text-align: center;">
         📅 FBI UCR Program • Hate Crime Statistics 2020
     </div>
     """, unsafe_allow_html=True)
 
-# ======================================================
-# MAIN CONTENT
-# ======================================================
-
-# Hero Section
 st.markdown("""
 <div class="hero-card">
     <h1>⚖️ FBI Hate Crime Statistics 2020</h1>
@@ -64,7 +73,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Executive Summary KPIs
 render_section_title("📊 Executive Summary")
 
 kpis = [
@@ -77,7 +85,6 @@ render_kpi_grid(kpis)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Dashboard Sections
 render_section_title("📋 Dashboard Sections")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -101,7 +108,6 @@ for col, section in zip([col1, col2, col3, col4], sections):
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Key Highlights
 render_section_title("🔍 Key Highlights")
 
 col1, col2 = st.columns(2)
@@ -130,7 +136,6 @@ with col2:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Quick Statistics
 render_section_title("📈 Quick Statistics")
 
 col1, col2, col3 = st.columns(3)
@@ -154,7 +159,6 @@ for col, stat in zip([col1, col2, col3], quick_stats):
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# About Section
 render_section_title("📖 About This Project")
 
 with st.expander("📋 Click to view details", expanded=False):
